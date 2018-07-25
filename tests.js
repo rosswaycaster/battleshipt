@@ -224,3 +224,44 @@ it("place player 2 ship on grid")(() => {
 
   return deepEqual(bs.placeShip(beforeState, "E2"), afterState);
 });
+
+it("return number of ships placed")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [1, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.countShips(beforeState, 1), 3);
+});

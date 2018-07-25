@@ -42,7 +42,20 @@ const placeShip = (state, position) => {
   });
 };
 
+const countShips = (state, playerNum) => {
+  const player = `player${playerNum}`;
+  return state[player].ships.reduce((rowAcc, row) => {
+    return (
+      rowAcc +
+      row.reduce((colAcc, col) => {
+        return colAcc + (col || 0);
+      }, 0)
+    );
+  }, 0);
+};
+
 module.exports = {
   initialState,
-  placeShip
+  placeShip,
+  countShips
 };
