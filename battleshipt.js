@@ -11,6 +11,9 @@ const initialState = () => ({
   }
 });
 
+//Return a single merged object
+const mergeObjs = (...objs) => Object.assign({}, ...objs);
+
 //Create a 5 by 5 array
 const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 
@@ -32,7 +35,7 @@ const placeShip = (state, position) => {
     return row;
   });
 
-  return Object.assign({}, state, {
+  return mergeObjs(state, {
     [currentPlayer]: { ...state[currentPlayer], ships: updatedShips }
   });
 };
