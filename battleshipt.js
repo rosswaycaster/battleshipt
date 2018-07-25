@@ -23,10 +23,10 @@ const letters = "ABCDE";
 const letterToRow = row => letters.indexOf(row);
 
 //Return an updated state with ship placed
-const placeShip = (state, position) => {
-  const currentPlayer = `player${state.currentPlayer}`;
+const placeShip = (state, playerNum, position) => {
+  const player = `player${playerNum}`;
 
-  const ships = state[currentPlayer].ships.map((row, rowIndex) => {
+  const ships = state[player].ships.map((row, rowIndex) => {
     if (rowIndex === letterToRow(position[0])) {
       return row.map((col, colIndex) => {
         if (colIndex === Number(position[1])) {
@@ -38,7 +38,7 @@ const placeShip = (state, position) => {
   });
 
   return mergeObjs(state, {
-    [currentPlayer]: { ...state[currentPlayer], ships }
+    [player]: { ...state[player], ships }
   });
 };
 

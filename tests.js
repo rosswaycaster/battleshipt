@@ -144,7 +144,7 @@ it("place player 1 ship on grid")(() => {
     }
   };
 
-  return deepEqual(bs.placeShip(beforeState, "B1"), afterState);
+  return deepEqual(bs.placeShip(beforeState, 1, "B1"), afterState);
 });
 
 it("place player 2 ship on grid")(() => {
@@ -222,7 +222,7 @@ it("place player 2 ship on grid")(() => {
     }
   };
 
-  return deepEqual(bs.placeShip(beforeState, "E2"), afterState);
+  return deepEqual(bs.placeShip(beforeState, 2, "E2"), afterState);
 });
 
 it("return number of ships placed")(() => {
