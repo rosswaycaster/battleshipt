@@ -42,6 +42,7 @@ const placeShip = (state, position) => {
   });
 };
 
+//Return the number of ships on players grid
 const countShips = (state, playerNum) => {
   const player = `player${playerNum}`;
   return state[player].ships.reduce((rowAcc, row) => {
@@ -54,8 +55,20 @@ const countShips = (state, playerNum) => {
   }, 0);
 };
 
+//Return boolean if ship can be placed on board
+const canPlaceShip = (state, position) => {
+  const currentPlayer = `player${state.currentPlayer}`;
+  const rowIndex = letterToRow(position[0]);
+  const colIndex = Number(position[1]);
+
+  return state[currentPlayer].ships[rowIndex][colIndex] === undefined
+    ? true
+    : false;
+};
+
 module.exports = {
   initialState,
   placeShip,
-  countShips
+  countShips,
+  canPlaceShip
 };

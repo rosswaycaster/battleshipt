@@ -265,3 +265,85 @@ it("return number of ships placed")(() => {
 
   return equal(bs.countShips(beforeState, 1), 3);
 });
+
+it("can place ship")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.canPlaceShip(beforeState, "A1"), true);
+});
+
+it("can't place ship")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.canPlaceShip(beforeState, "E1"), false);
+});
