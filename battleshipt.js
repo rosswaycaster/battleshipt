@@ -17,14 +17,16 @@ const mergeObjs = (...objs) => Object.assign({}, ...objs);
 //Create a 5 by 5 array
 const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 
+const letters = "ABCDE";
+
 //Return the index of the letter
-const letterToRow = row => "ABCDF".indexOf(row);
+const letterToRow = row => letters.indexOf(row);
 
 //Return an updated state with ship placed
 const placeShip = (state, position) => {
   const currentPlayer = `player${state.currentPlayer}`;
 
-  const updatedShips = state[currentPlayer].ships.map((row, rowIndex) => {
+  const ships = state[currentPlayer].ships.map((row, rowIndex) => {
     if (rowIndex === letterToRow(position[0])) {
       return row.map((col, colIndex) => {
         if (colIndex === Number(position[1])) {
@@ -36,7 +38,7 @@ const placeShip = (state, position) => {
   });
 
   return mergeObjs(state, {
-    [currentPlayer]: { ...state[currentPlayer], ships: updatedShips }
+    [currentPlayer]: { ...state[currentPlayer], ships }
   });
 };
 

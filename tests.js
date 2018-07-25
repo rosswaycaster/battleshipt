@@ -69,7 +69,7 @@ it("return initial state")(() => {
   return deepEqual(bs.initialState(), afterState);
 });
 
-it("place ship on grid")(() => {
+it("place player 1 ship on grid")(() => {
   const beforeState = {
     multiPlayer: null,
     currentPlayer: 1,
@@ -145,4 +145,82 @@ it("place ship on grid")(() => {
   };
 
   return deepEqual(bs.placeShip(beforeState, "B1"), afterState);
+});
+
+it("place player 2 ship on grid")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 2,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  const afterState = {
+    multiPlayer: null,
+    currentPlayer: 2,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return deepEqual(bs.placeShip(beforeState, "E2"), afterState);
 });
