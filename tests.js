@@ -16,6 +16,7 @@ const equal = (a, b) => a === b;
 
 const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+//Start the timer
 console.time("Execution Time");
 
 // Test the test framework
@@ -295,4 +296,5 @@ it("did not hit ship")(() => {
   return equal(bs.didHitShip(beforeState, 1, "B4"), false);
 });
 
+//Stop and log the timer
 console.timeEnd("Execution Time");
