@@ -1,3 +1,4 @@
+//Return the initial state of the game
 const initialState = () => ({
   multiPlayer: null,
   currentPlayer: 1,
