@@ -304,7 +304,7 @@ it("can place ship")(() => {
     }
   };
 
-  return equal(bs.canPlaceShip(beforeState, "A1"), true);
+  return equal(bs.canPlace(beforeState, 1, "ships", "A1"), true);
 });
 
 it("can't place ship")(() => {
@@ -345,5 +345,5 @@ it("can't place ship")(() => {
     }
   };
 
-  return equal(bs.canPlaceShip(beforeState, "E1"), false);
+  return equal(bs.canPlace(beforeState, 1, "ships", "E1"), false);
 });

@@ -22,17 +22,20 @@ const letters = "ABCDE";
 //Return the index of the letter
 const letterToRow = row => letters.indexOf(row);
 
+//Return object of row & column indexs from position string
+const positionIndexes = position => ({
+  rowIndex: letterToRow(position[0]),
+  colIndex: Number(position[1])
+});
+
 //Return an updated state with ship placed
 const placeShip = (state, playerNum, position) => {
   const player = `player${playerNum}`;
+  const { rowIndex, colIndex } = positionIndexes(position);
 
-  const ships = state[player].ships.map((row, rowIndex) => {
-    if (rowIndex === letterToRow(position[0])) {
-      return row.map((col, colIndex) => {
-        if (colIndex === Number(position[1])) {
-          return 1;
-        }
-      });
+  const ships = state[player].ships.map((row, index) => {
+    if (index === rowIndex) {
+      return row.map((col, index) => (index === colIndex ? 1 : col));
     }
     return row;
   });
@@ -55,20 +58,19 @@ const countShips = (state, playerNum) => {
   }, 0);
 };
 
-//Return boolean if ship can be placed on board
-const canPlaceShip = (state, position) => {
-  const currentPlayer = `player${state.currentPlayer}`;
-  const rowIndex = letterToRow(position[0]);
-  const colIndex = Number(position[1]);
-
-  return state[currentPlayer].ships[rowIndex][colIndex] === undefined
-    ? true
-    : false;
+//Return value at position
+const positionValue = (state, playerNum, type, position) => {
+  const { rowIndex, colIndex } = positionIndexes(position);
+  return state[`player${playerNum}`][type][rowIndex][colIndex];
 };
+
+//Return boolean if ship/hit can be placed on board
+const canPlace = (state, playerNum, type, position) =>
+  positionValue(state, playerNum, type, position) === undefined ? true : false;
 
 module.exports = {
   initialState,
   placeShip,
   countShips,
-  canPlaceShip
+  canPlace
 };
