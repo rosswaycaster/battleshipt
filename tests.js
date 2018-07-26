@@ -21,7 +21,7 @@ section("Testing Framework");
 
 it("true should pass")(true);
 
-it("false should fail")(false);
+it("false should fail (should be red)")(false);
 
 it("equal should pass")(equal(2, 2));
 
@@ -71,33 +71,8 @@ it("return initial state")(() => {
 
 it("place player 1 ship on grid")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -108,35 +83,10 @@ it("place player 1 ship on grid")(() => {
   };
 
   const afterState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined]
@@ -149,33 +99,8 @@ it("place player 1 ship on grid")(() => {
 
 it("place player 2 ship on grid")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 2,
-    player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, 1, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
     player2: {
       ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -186,24 +111,6 @@ it("place player 2 ship on grid")(() => {
   };
 
   const afterState = {
-    multiPlayer: null,
-    currentPlayer: 2,
-    player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, 1, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
     player2: {
       ships: [
         [undefined, undefined, undefined, undefined, undefined],
@@ -211,13 +118,6 @@ it("place player 2 ship on grid")(() => {
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, 1, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
       ]
     }
   };
@@ -227,32 +127,7 @@ it("place player 2 ship on grid")(() => {
 
 it("place player 1 hit on grid")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -264,37 +139,12 @@ it("place player 1 hit on grid")(() => {
   };
 
   const afterState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, 1, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined]
       ]
     }
@@ -305,32 +155,7 @@ it("place player 1 hit on grid")(() => {
 
 it("place player 2 hit on grid")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 2,
-    player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
     player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -342,32 +167,7 @@ it("place player 2 hit on grid")(() => {
   };
 
   const afterState = {
-    multiPlayer: null,
-    currentPlayer: 2,
-    player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
     player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -383,8 +183,6 @@ it("place player 2 hit on grid")(() => {
 
 it("return number of ships placed")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [1, undefined, undefined, undefined, undefined],
@@ -392,29 +190,6 @@ it("return number of ships placed")(() => {
         [undefined, undefined, 1, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
       ]
     }
   };
@@ -424,8 +199,6 @@ it("return number of ships placed")(() => {
 
 it("can place ship")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [undefined, undefined, undefined, undefined, undefined],
@@ -433,29 +206,6 @@ it("can place ship")(() => {
         [undefined, undefined, 1, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
       ]
     }
   };
@@ -465,8 +215,6 @@ it("can place ship")(() => {
 
 it("can't place ship")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [undefined, undefined, undefined, undefined, undefined],
@@ -474,29 +222,6 @@ it("can't place ship")(() => {
         [undefined, undefined, 1, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
       ]
     }
   };
@@ -506,38 +231,13 @@ it("can't place ship")(() => {
 
 it("can place hit")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, 1, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
       ]
     }
   };
@@ -547,37 +247,12 @@ it("can place hit")(() => {
 
 it("can't place hit")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, 1, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, 1, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined]
       ]
     }
@@ -588,34 +263,9 @@ it("can't place hit")(() => {
 
 it("did hit ship")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [undefined, 1, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
@@ -629,34 +279,9 @@ it("did hit ship")(() => {
 
 it("did not hit ship")(() => {
   const beforeState = {
-    multiPlayer: null,
-    currentPlayer: 1,
     player1: {
       ships: [
         [undefined, 1, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ]
-    },
-    player2: {
-      ships: [
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, undefined, undefined, undefined]
-      ],
-      hits: [
-        [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
