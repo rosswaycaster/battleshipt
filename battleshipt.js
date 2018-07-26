@@ -20,7 +20,7 @@ const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 const letters = "ABCDE";
 
 //Return the index of the letter
-const letterToRow = row => letters.indexOf(row);
+const letterToRow = row => letters.indexOf(row.toUpperCase());
 
 //Return object of row & column indexs from position string
 const positionIndexes = position => ({
@@ -74,12 +74,17 @@ const positionValue = (state, playerNum, type, position) => {
 
 //Return boolean if ship/hit can be placed on board
 const canPlace = (state, playerNum, type, position) =>
-  positionValue(state, playerNum, type, position) === undefined ? true : false;
+  positionValue(state, playerNum, type, position) === undefined;
+
+//Return boolean if ship was hit
+const didHit = (state, playerNum, position) =>
+  positionValue(state, playerNum, "ships", position) === 1;
 
 module.exports = {
   initialState,
   placeShip,
   placeHit,
   countShips,
-  canPlace
+  canPlace,
+  didHit
 };

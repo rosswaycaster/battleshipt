@@ -503,3 +503,167 @@ it("can't place ship")(() => {
 
   return equal(bs.canPlace(beforeState, 1, "ships", "E1"), false);
 });
+
+it("can place hit")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.canPlace(beforeState, 1, "hits", "A1"), true);
+});
+
+it("can't place hit")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.canPlace(beforeState, 1, "hits", "B1"), false);
+});
+
+it("did hit ship")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.didHit(beforeState, 1, "A1"), true);
+});
+
+it("did not hit ship")(() => {
+  const beforeState = {
+    multiPlayer: null,
+    currentPlayer: 1,
+    player1: {
+      ships: [
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    },
+    player2: {
+      ships: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ],
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.didHit(beforeState, 1, "B4"), false);
+});
