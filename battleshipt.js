@@ -76,8 +76,16 @@ const positionValue = (state, playerNum, type, position) => {
 const canPlace = (state, playerNum, type, position) =>
   positionValue(state, playerNum, type, position) === undefined;
 
+//Easily check if ship can be placed
+const canPlaceShip = (state, playerNum, position) =>
+  canPlace(state, playerNum, "ships", position);
+
+//Easily check if hit can be placed
+const canPlaceHit = (state, playerNum, position) =>
+  canPlace(state, playerNum, "hits", position);
+
 //Return boolean if ship was hit
-const didHit = (state, playerNum, position) =>
+const didHitShip = (state, playerNum, position) =>
   positionValue(state, playerNum, "ships", position) === 1;
 
 module.exports = {
@@ -85,6 +93,7 @@ module.exports = {
   placeShip,
   placeHit,
   countShips,
-  canPlace,
-  didHit
+  canPlaceShip,
+  canPlaceHit,
+  didHitShip
 };

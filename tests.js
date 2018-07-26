@@ -460,7 +460,7 @@ it("can place ship")(() => {
     }
   };
 
-  return equal(bs.canPlace(beforeState, 1, "ships", "A1"), true);
+  return equal(bs.canPlaceShip(beforeState, 1, "A1"), true);
 });
 
 it("can't place ship")(() => {
@@ -501,7 +501,7 @@ it("can't place ship")(() => {
     }
   };
 
-  return equal(bs.canPlace(beforeState, 1, "ships", "E1"), false);
+  return equal(bs.canPlaceShip(beforeState, 1, "E1"), false);
 });
 
 it("can place hit")(() => {
@@ -542,7 +542,7 @@ it("can place hit")(() => {
     }
   };
 
-  return equal(bs.canPlace(beforeState, 1, "hits", "A1"), true);
+  return equal(bs.canPlaceHit(beforeState, 1, "A1"), true);
 });
 
 it("can't place hit")(() => {
@@ -583,7 +583,7 @@ it("can't place hit")(() => {
     }
   };
 
-  return equal(bs.canPlace(beforeState, 1, "hits", "B1"), false);
+  return equal(bs.canPlaceHit(beforeState, 1, "B1"), false);
 });
 
 it("did hit ship")(() => {
@@ -624,7 +624,7 @@ it("did hit ship")(() => {
     }
   };
 
-  return equal(bs.didHit(beforeState, 1, "A1"), true);
+  return equal(bs.didHitShip(beforeState, 1, "A1"), true);
 });
 
 it("did not hit ship")(() => {
@@ -665,5 +665,5 @@ it("did not hit ship")(() => {
     }
   };
 
-  return equal(bs.didHit(beforeState, 1, "B4"), false);
+  return equal(bs.didHitShip(beforeState, 1, "B4"), false);
 });
