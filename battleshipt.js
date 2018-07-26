@@ -28,12 +28,12 @@ const positionIndexes = position => ({
   colIndex: Number(position[1])
 });
 
-//Return an updated state with ship placed
-const placeShip = (state, playerNum, position) => {
+//Return an updated state with ship/hit placed
+const place = (state, playerNum, type, position) => {
   const player = `player${playerNum}`;
   const { rowIndex, colIndex } = positionIndexes(position);
 
-  const ships = state[player].ships.map((row, index) => {
+  const grid = state[player][type].map((row, index) => {
     if (index === rowIndex) {
       return row.map((col, index) => (index === colIndex ? 1 : col));
     }
@@ -41,9 +41,17 @@ const placeShip = (state, playerNum, position) => {
   });
 
   return mergeObjs(state, {
-    [player]: { ...state[player], ships }
+    [player]: { ...state[player], [type]: grid }
   });
 };
+
+//Easily place a ship
+const placeShip = (state, playerNum, position) =>
+  place(state, playerNum, "ships", position);
+
+//Easily place a hit
+const placeHit = (state, playerNum, position) =>
+  place(state, playerNum, "hits", position);
 
 //Return the number of ships on players grid
 const countShips = (state, playerNum) => {
@@ -71,6 +79,7 @@ const canPlace = (state, playerNum, type, position) =>
 module.exports = {
   initialState,
   placeShip,
+  placeHit,
   countShips,
   canPlace
 };
