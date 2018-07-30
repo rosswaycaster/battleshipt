@@ -20,6 +20,8 @@ const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 
 const letters = "ABCDE";
 
+const numberOfShips = 3;
+
 //Return the index of the letter
 const letterToRow = row => letters.indexOf(row.toUpperCase());
 
@@ -57,10 +59,10 @@ const placeShip = (state, playerNum, position) =>
 const placeHit = (state, playerNum, position) =>
   place(state, playerNum, "hits", position);
 
-//Return the number of ships on players grid
-const countShips = (state, playerNum) => {
+//Return the number of ships/hits on players grid
+const count = (state, playerNum, type) => {
   const player = playerString(playerNum);
-  return state[player].ships.reduce((rowAcc, row) => {
+  return state[player][type].reduce((rowAcc, row) => {
     return (
       rowAcc +
       row.reduce((colAcc, col) => {
@@ -69,6 +71,12 @@ const countShips = (state, playerNum) => {
     );
   }, 0);
 };
+
+//Easily count ships
+const countShips = (state, playerNum) => count(state, playerNum, "ships");
+
+//Easily count hits
+const countHits = (state, playerNum) => count(state, playerNum, "hits");
 
 //Return value at position
 const positionValue = (state, playerNum, type, position) => {
@@ -97,11 +105,14 @@ const didHitShip = (state, playerNum, position) =>
 const togglePlayer = state =>
   mergeObjs(state, { currentPlayer: state.currentPlayer === 1 ? 2 : 1 });
 
+const isWinner = state => {};
+
 module.exports = {
   initialState,
   placeShip,
   placeHit,
   countShips,
+  countHits,
   canPlaceShip,
   canPlaceHit,
   didHitShip,

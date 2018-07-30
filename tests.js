@@ -184,7 +184,7 @@ it("place player 2 hit on grid")(() => {
   return deepEqual(bs.placeHit(beforeState, 2, "E2"), afterState);
 });
 
-it("return number of ships placed")(() => {
+it("return number of ships for player")(() => {
   const beforeState = {
     player1: {
       ships: [
@@ -198,6 +198,22 @@ it("return number of ships placed")(() => {
   };
 
   return equal(bs.countShips(beforeState, 1), 3);
+});
+
+it("return number of hits for player")(() => {
+  const beforeState = {
+    player2: {
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [1, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, 1]
+      ]
+    }
+  };
+
+  return equal(bs.countHits(beforeState, 2), 3);
 });
 
 it("can place ship")(() => {
