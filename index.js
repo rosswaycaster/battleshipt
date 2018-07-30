@@ -44,9 +44,24 @@ const gameLoop = async () => {
   }
 
   //prompt current player to place a hit
+  const position = await prompt(
+    `Player ${state.currentPlayer}: Where would you like to attack?`
+  );
   ////check if hit is valid
-  /////if false prompt again
-  /////if true place hit, toggle player, rerun game loop
+  if (bs.canPlaceHit(state, state.currentPlayer, position)) {
+    /////if true place hit, toggle player, rerun game loop
+    if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
+      state = bs.placeHit(state, state.currentPlayer, position);
+    } else {
+      state = bs.placeMiss(state, state.currentPlayer, position);
+    }
+    state = bs.togglePlayer(state);
+    return gameLoop();
+  } else {
+    /////if false prompt again
+    console.log("You've already attacked here");
+    return gameLoop();
+  }
 
   return gameLoop();
 };
