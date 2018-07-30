@@ -23,6 +23,7 @@ const gameLoop = async () => {
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
     console.log(`Player ${winningPlayer} Wins!`);
+    state = bs.initialState();
   }
 
   //see if current player has placed all ships
@@ -39,6 +40,7 @@ const gameLoop = async () => {
       return gameLoop();
     } else {
       console.log("You've already placed a ship there.");
+      return gameLoop();
     }
     ////////if false prompt again
   }
@@ -60,7 +62,6 @@ const gameLoop = async () => {
   } else {
     /////if false prompt again
     console.log("You've already attacked here");
-    return gameLoop();
   }
 
   return gameLoop();
