@@ -23,6 +23,9 @@ const letters = "ABCDE";
 //Return the index of the letter
 const letterToRow = row => letters.indexOf(row.toUpperCase());
 
+//Return player number string
+const playerString = playerNum => `player${playerNum}`;
+
 //Return object of row & column indexs from position string
 const positionIndexes = position => ({
   rowIndex: letterToRow(position[0]),
@@ -31,7 +34,7 @@ const positionIndexes = position => ({
 
 //Return an updated state with ship/hit placed
 const place = (state, playerNum, type, position) => {
-  const player = `player${playerNum}`;
+  const player = playerString(playerNum);
   const { rowIndex, colIndex } = positionIndexes(position);
 
   const grid = state[player][type].map((row, index) => {
@@ -56,7 +59,7 @@ const placeHit = (state, playerNum, position) =>
 
 //Return the number of ships on players grid
 const countShips = (state, playerNum) => {
-  const player = `player${playerNum}`;
+  const player = playerString(playerNum);
   return state[player].ships.reduce((rowAcc, row) => {
     return (
       rowAcc +
@@ -70,7 +73,8 @@ const countShips = (state, playerNum) => {
 //Return value at position
 const positionValue = (state, playerNum, type, position) => {
   const { rowIndex, colIndex } = positionIndexes(position);
-  return state[`player${playerNum}`][type][rowIndex][colIndex];
+  const player = playerString(playerNum);
+  return state[player][type][rowIndex][colIndex];
 };
 
 //Return boolean if ship/hit can be placed on board
