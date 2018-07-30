@@ -123,6 +123,7 @@ const hasWinner = state => {
 
 module.exports = {
   initialState,
+  numberOfShips,
   placeShip,
   placeHit,
   countShips,
