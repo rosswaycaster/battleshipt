@@ -18,12 +18,23 @@ const prompt = q => {
 
 let state = bs.initialState();
 
-const gameLoop = () => {
+const gameLoop = async () => {
   //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
     console.log(`Player ${winningPlayer} Wins!`);
   }
+
+  //see if current player has placed all ships
+  ////if false then prompt to place ship
+  //////check if ship is valid
+  ////////if false prompt again
+  ////////if true place ship, rerun game loop
+
+  //prompt current player to place a hit
+  ////check if hit is valid
+  /////if false prompt again
+  /////if true place hit, toggle player, rerun game loop
 
   return gameLoop();
 };
