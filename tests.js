@@ -209,7 +209,7 @@ it("place player 2 hit on grid as a miss")(() => {
     }
   };
 
-  return deepEqual(bs.placeHit(beforeState, 2, "E2", 0), afterState);
+  return deepEqual(bs.placeMiss(beforeState, 2, "E2", 0), afterState);
 });
 
 it("return number of ships for player")(() => {

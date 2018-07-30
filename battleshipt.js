@@ -56,8 +56,12 @@ const placeShip = (state, playerNum, position) =>
   place(state, playerNum, "ships", position);
 
 //Easily place a hit
-const placeHit = (state, playerNum, position, value) =>
-  place(state, playerNum, "hits", position, value);
+const placeHit = (state, playerNum, position) =>
+  place(state, playerNum, "hits", position);
+
+//Easily place a miss
+const placeMiss = (state, playerNum, position) =>
+  place(state, playerNum, "hits", position, 0);
 
 //Return the number of ships/hits on players grid
 const count = (state, playerNum, type) => {
@@ -126,6 +130,7 @@ module.exports = {
   numberOfShips,
   placeShip,
   placeHit,
+  placeMiss,
   countShips,
   countHits,
   canPlaceShip,
