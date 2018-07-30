@@ -101,9 +101,12 @@ const canPlaceHit = (state, playerNum, position) =>
 const didHitShip = (state, playerNum, position) =>
   positionValue(state, playerNum, "ships", position) === 1;
 
+//Return the number of the other player
+const otherPlayer = playerNum => (playerNum === 1 ? 2 : 1);
+
 //Return an updated state with the current player toggled
 const togglePlayer = state =>
-  mergeObjs(state, { currentPlayer: state.currentPlayer === 1 ? 2 : 1 });
+  mergeObjs(state, { currentPlayer: otherPlayer(state.currentPlayer) });
 
 const isWinner = state => {};
 
@@ -116,5 +119,6 @@ module.exports = {
   canPlaceShip,
   canPlaceHit,
   didHitShip,
+  otherPlayer,
   togglePlayer
 };
