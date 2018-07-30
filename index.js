@@ -33,16 +33,21 @@ const gameLoop = async () => {
       `Player ${state.currentPlayer}: Where would you like to place your ship?`
     );
     //////check if ship is valid
-    if (bs.canPlaceShip(state, state.currentPlayer, position)) {
-      ////////if true place ship, rerun game loop
-      state = bs.placeShip(state, state.currentPlayer, position);
-      state = bs.togglePlayer(state);
-      return gameLoop();
+    if (bs.validPosition(position)) {
+      if (bs.canPlaceShip(state, state.currentPlayer, position)) {
+        ////////if true place ship, rerun game loop
+        state = bs.placeShip(state, state.currentPlayer, position);
+        state = bs.togglePlayer(state);
+        return gameLoop();
+      } else {
+        console.log("You've already placed a ship there.");
+        return gameLoop();
+      }
     } else {
-      console.log("You've already placed a ship there.");
+      ////////if false prompt again
+      console.log("Invalid position.");
       return gameLoop();
     }
-    ////////if false prompt again
   }
 
   //prompt current player to place a hit
@@ -50,21 +55,26 @@ const gameLoop = async () => {
     `Player ${state.currentPlayer}: Where would you like to attack?`
   );
   ////check if hit is valid
-  if (bs.canPlaceHit(state, state.currentPlayer, position)) {
-    /////if true place hit, toggle player, rerun game loop
-    if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
-      state = bs.placeHit(state, state.currentPlayer, position);
+  if (bs.validPosition(position)) {
+    if (bs.canPlaceHit(state, state.currentPlayer, position)) {
+      /////if true place hit, toggle player, rerun game loop
+      if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
+        state = bs.placeHit(state, state.currentPlayer, position);
+      } else {
+        state = bs.placeMiss(state, state.currentPlayer, position);
+      }
+      state = bs.togglePlayer(state);
+      return gameLoop();
     } else {
-      state = bs.placeMiss(state, state.currentPlayer, position);
+      /////if false prompt again
+      console.log("You've already attacked here");
+      return gameLoop();
     }
-    state = bs.togglePlayer(state);
-    return gameLoop();
   } else {
-    /////if false prompt again
-    console.log("You've already attacked here");
+    ////////if false prompt again
+    console.log("Invalid position.");
+    return gameLoop();
   }
-
-  return gameLoop();
 };
 
 gameLoop();

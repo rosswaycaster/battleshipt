@@ -89,6 +89,12 @@ const positionValue = (state, playerNum, type, position) => {
   return state[player][type][rowIndex][colIndex];
 };
 
+//Return boolean if the position is possibile on the grid
+const validPosition = position =>
+  letterToRow(position[0]) > -1 &&
+  Number(position[1]) <= 5 &&
+  Number(position[1]) > 0;
+
 //Return boolean if ship/hit can be placed on board
 const canPlace = (state, playerNum, type, position) =>
   positionValue(state, playerNum, type, position) === undefined;
@@ -128,6 +134,7 @@ const hasWinner = state => {
 module.exports = {
   initialState,
   numberOfShips,
+  validPosition,
   placeShip,
   placeHit,
   placeMiss,
