@@ -336,5 +336,71 @@ it("toggle current player from 2 to 1")(() => {
   return deepEqual(bs.togglePlayer(beforeState), afterState);
 });
 
+it("player 1 is winner")(() => {
+  const beforeState = {
+    player1: {
+      hits: [
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.hasWinner(beforeState), 1);
+});
+
+it("player 2 is winner")(() => {
+  const beforeState = {
+    player1: {
+      hits: [
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    },
+    player2: {
+      hits: [
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.hasWinner(beforeState), 2);
+});
+
+it("there is no winner")(() => {
+  const beforeState = {
+    player1: {
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, 1, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    },
+    player2: {
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 1, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, 1, undefined]
+      ]
+    }
+  };
+
+  return equal(bs.hasWinner(beforeState), false);
+});
+
 //Stop and log the timer
 console.timeEnd("Execution Time");

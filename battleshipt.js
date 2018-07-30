@@ -108,7 +108,17 @@ const otherPlayer = playerNum => (playerNum === 1 ? 2 : 1);
 const togglePlayer = state =>
   mergeObjs(state, { currentPlayer: otherPlayer(state.currentPlayer) });
 
-const isWinner = state => {};
+const hasWinner = state => {
+  if (countHits(state, 1) === 3) {
+    return 1;
+  }
+
+  if (countHits(state, 2) === 3) {
+    return 2;
+  }
+
+  return false;
+};
 
 module.exports = {
   initialState,
@@ -119,6 +129,6 @@ module.exports = {
   canPlaceShip,
   canPlaceHit,
   didHitShip,
-  otherPlayer,
-  togglePlayer
+  togglePlayer,
+  hasWinner
 };
