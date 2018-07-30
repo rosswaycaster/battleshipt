@@ -23,7 +23,7 @@ const gameLoop = async () => {
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
     console.log(`Player ${winningPlayer} Wins!`);
-    state = bs.initialState();
+    process.exit();
   }
 
   //see if current player has placed all ships
