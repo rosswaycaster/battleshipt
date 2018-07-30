@@ -296,5 +296,29 @@ it("did not hit ship")(() => {
   return equal(bs.didHitShip(beforeState, 1, "B4"), false);
 });
 
+it("toggle current player from 1 to 2")(() => {
+  const beforeState = {
+    currentPlayer: 1
+  };
+
+  const afterState = {
+    currentPlayer: 2
+  };
+
+  return deepEqual(bs.togglePlayer(beforeState), afterState);
+});
+
+it("toggle current player from 2 to 1")(() => {
+  const beforeState = {
+    currentPlayer: 2
+  };
+
+  const afterState = {
+    currentPlayer: 1
+  };
+
+  return deepEqual(bs.togglePlayer(beforeState), afterState);
+});
+
 //Stop and log the timer
 console.timeEnd("Execution Time");
