@@ -108,12 +108,13 @@ const otherPlayer = playerNum => (playerNum === 1 ? 2 : 1);
 const togglePlayer = state =>
   mergeObjs(state, { currentPlayer: otherPlayer(state.currentPlayer) });
 
+//Check if there is a winner then return the winning player number
 const hasWinner = state => {
-  if (countHits(state, 1) === 3) {
+  if (countHits(state, 1) === numberOfShips) {
     return 1;
   }
 
-  if (countHits(state, 2) === 3) {
+  if (countHits(state, 2) === numberOfShips) {
     return 2;
   }
 
