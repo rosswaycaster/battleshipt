@@ -26,10 +26,22 @@ const gameLoop = async () => {
   }
 
   //see if current player has placed all ships
-  ////if false then prompt to place ship
-  //////check if ship is valid
-  ////////if false prompt again
-  ////////if true place ship, rerun game loop
+  if (bs.countShips(state, state.currentPlayer) < bs.numberOfShips) {
+    ////if false then prompt to place ship
+    const position = await prompt(
+      `Player ${state.currentPlayer}: Where would you like to place your ship?`
+    );
+    //////check if ship is valid
+    if (bs.canPlaceShip(state, state.currentPlayer, position)) {
+      ////////if true place ship, rerun game loop
+      state = bs.placeShip(state, state.currentPlayer, position);
+      state = bs.togglePlayer(state);
+      return gameLoop();
+    } else {
+      console.log("You've already placed a ship there.");
+    }
+    ////////if false prompt again
+  }
 
   //prompt current player to place a hit
   ////check if hit is valid
