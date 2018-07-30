@@ -93,6 +93,7 @@ const canPlaceHit = (state, playerNum, position) =>
 const didHitShip = (state, playerNum, position) =>
   positionValue(state, playerNum, "ships", position) === 1;
 
+//Return an updated state with the current player toggled
 const togglePlayer = state =>
   mergeObjs(state, { currentPlayer: state.currentPlayer === 1 ? 2 : 1 });
 
