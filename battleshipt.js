@@ -35,13 +35,13 @@ const positionIndexes = position => ({
 });
 
 //Return an updated state with ship/hit placed
-const place = (state, playerNum, type, position) => {
+const place = (state, playerNum, type, position, value = 1) => {
   const player = playerString(playerNum);
   const { rowIndex, colIndex } = positionIndexes(position);
 
   const grid = state[player][type].map((row, index) => {
     if (index === rowIndex) {
-      return row.map((col, index) => (index === colIndex ? 1 : col));
+      return row.map((col, index) => (index === colIndex ? value : col));
     }
     return row;
   });
@@ -56,8 +56,8 @@ const placeShip = (state, playerNum, position) =>
   place(state, playerNum, "ships", position);
 
 //Easily place a hit
-const placeHit = (state, playerNum, position) =>
-  place(state, playerNum, "hits", position);
+const placeHit = (state, playerNum, position, value) =>
+  place(state, playerNum, "hits", position, value);
 
 //Return the number of ships/hits on players grid
 const count = (state, playerNum, type) => {

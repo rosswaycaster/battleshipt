@@ -184,6 +184,34 @@ it("place player 2 hit on grid")(() => {
   return deepEqual(bs.placeHit(beforeState, 2, "E2"), afterState);
 });
 
+it("place player 2 hit on grid as a miss")(() => {
+  const beforeState = {
+    player2: {
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined]
+      ]
+    }
+  };
+
+  const afterState = {
+    player2: {
+      hits: [
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined, undefined],
+        [undefined, undefined, 0, undefined, undefined]
+      ]
+    }
+  };
+
+  return deepEqual(bs.placeHit(beforeState, 2, "E2", 0), afterState);
+});
+
 it("return number of ships for player")(() => {
   const beforeState = {
     player1: {
@@ -205,9 +233,9 @@ it("return number of hits for player")(() => {
     player2: {
       hits: [
         [undefined, undefined, undefined, undefined, undefined],
-        [undefined, undefined, 1, undefined, undefined],
+        [0, undefined, 1, undefined, undefined],
         [undefined, undefined, undefined, undefined, undefined],
-        [1, undefined, undefined, undefined, undefined],
+        [1, undefined, undefined, 0, undefined],
         [undefined, undefined, undefined, undefined, 1]
       ]
     }
