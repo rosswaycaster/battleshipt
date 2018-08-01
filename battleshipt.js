@@ -138,6 +138,14 @@ const validPosition = position =>
   Number(position[1]) <= 4 &&
   Number(position[1]) >= 0;
 
+const naturalizePosition = position => {
+  const reversed = position
+    .split("")
+    .reverse()
+    .join("");
+  return validPosition(reversed) ? reversed : position;
+};
+
 //Return boolean if ship/hit can be placed on board
 const canPlace = (state, playerNum, type, position) =>
   positionValue(state, playerNum, type, position) === undefined;
@@ -182,6 +190,7 @@ module.exports = {
   multiplayerState,
   numberOfShips,
   validPosition,
+  naturalizePosition,
   randomShipPosition,
   randomHitPosition,
   placeShip,

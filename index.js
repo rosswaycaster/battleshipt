@@ -105,11 +105,13 @@ const placeShips = async () => {
     }
 
     ////if false then prompt to place ship
-    const position = await prompt(
-      shipsGrid(playerShips(state.currentPlayer)) +
-        `Player ${
-          state.currentPlayer
-        }: Where would you like to place your ship #${shipCount + 1}?`
+    const position = bs.naturalizePosition(
+      await prompt(
+        shipsGrid(playerShips(state.currentPlayer)) +
+          `Player ${
+            state.currentPlayer
+          }: Where would you like to place your ship #${shipCount + 1}?`
+      )
     );
     //////check if ship is valid
     if (bs.validPosition(position)) {
@@ -156,9 +158,11 @@ const placeHits = async () => {
   }
 
   //prompt current player to place a hit
-  const position = await prompt(
-    hitsGrid(playerHits(state.currentPlayer)) +
-      `Player ${state.currentPlayer}: Where would you like to attack?`
+  const position = bs.naturalizePosition(
+    await prompt(
+      hitsGrid(playerHits(state.currentPlayer)) +
+        `Player ${state.currentPlayer}: Where would you like to attack?`
+    )
   );
   ////check if hit is valid
   if (bs.validPosition(position)) {
