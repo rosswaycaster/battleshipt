@@ -25,9 +25,7 @@ const errorMsg = msg => console.log("\x1b[31m%s\x1b[0m", msg);
 
 const clearTerminal = () => console.log("\033c");
 
-let state = bs.initialState();
-
-const gameLoop = async () => {
+const checkForWinner = () => {
   //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
@@ -35,8 +33,9 @@ const gameLoop = async () => {
     winningMsg(`Player ${winningPlayer} Wins!`);
     process.exit();
   }
+};
 
-  //see if current player has placed all ships
+const placeShips = async () => {
   if (bs.countShips(state, state.currentPlayer) < bs.numberOfShips) {
     ////if false then prompt to place ship
     const position = await prompt(
@@ -62,7 +61,9 @@ const gameLoop = async () => {
       return gameLoop();
     }
   }
+};
 
+const placeHits = async () => {
   //prompt current player to place a hit
   const position = await prompt(
     `Player ${state.currentPlayer}: Where would you like to attack?`
@@ -94,6 +95,17 @@ const gameLoop = async () => {
     errorMsg(`${position} is an invalid position. Try again.`);
     return gameLoop();
   }
+};
+
+let state = bs.initialState();
+
+const gameLoop = async () => {
+  checkForWinner();
+
+  //see if current player has placed all ships
+  placeShips();
+
+  placeHits();
 };
 
 clearTerminal();
