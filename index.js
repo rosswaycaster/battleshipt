@@ -1,4 +1,6 @@
+//Battleshipt game logic
 const bs = require("./battleshipt");
+//Use the readline module to get player input
 const readline = require("readline");
 
 const rl = readline.createInterface({
@@ -6,6 +8,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//Prompt the player with a question and return the answer
 const prompt = q => {
   return new Promise(resolve => {
     rl.question(q + "\n> ", answer => {
@@ -14,49 +17,65 @@ const prompt = q => {
   });
 };
 
+//Style the winning message
 const winningMsg = msg => console.log("\x1b[1m\x1b[32m\x1b[4m%s\x1b[0m\n", msg);
 
+//Style the success message
 const successMsg = msg => console.log("\x1b[32m%s\x1b[0m\n", msg);
 
+//Style the error message
 const errorMsg = msg => console.log("\x1b[31m%s\x1b[0m\n", msg);
 
+//Clear the terminal
 const clearTerminal = () => console.log("\033c");
 
+//Return a multiline string representing the ships array as a grid
 const shipsGrid = array =>
   array.reduce((str, row, rowIndex) => {
+    //add the column numbers along the top
     if (rowIndex === 0) {
       str += "  0 1 2 3 4";
     }
+    //append the row to the string
     str += row.reduce((rowStr, col, colIndex) => {
+      //add the row letter to the beginning of the string
       if (colIndex === 0) {
         rowStr += `\n${bs.letters[rowIndex]}`;
       }
+      //set the position value based on if a ship is placed or not
       const value = col === 1 ? "♦" : "◦";
+      //append to string
       return rowStr + ` ${value}`;
     }, "");
     return str;
-  }, "") + "\n\n";
+  }, "") + "\n\n"; //add two new lines for spacing
 
+//Return a multiline string representing the hits array as a grid
 const hitsGrid = array =>
   array.reduce((str, row, rowIndex) => {
+    //add the column numbers along the top
     if (rowIndex === 0) {
       str += "  0 1 2 3 4";
     }
+    //append the row to the string
     str += row.reduce((rowStr, col, colIndex) => {
+      //add the row letter to the beginning of the string
       if (colIndex === 0) {
         rowStr += `\n${bs.letters[rowIndex]}`;
       }
-      let value = "◦";
+      //set the position value based on if a ship is placed, a hit, or a miss
+      let value = "◦"; //not placed
       if (col === 1) {
-        value = "\x1b[31mX\x1b[0m";
+        value = "\x1b[31mX\x1b[0m"; //is a hit
       }
       if (col === 0) {
-        value = "•";
+        value = "•"; //is a miss
       }
+      //append to string
       return rowStr + ` ${value}`;
     }, "");
     return str;
-  }, "") + "\n\n";
+  }, "") + "\n\n"; //add two new lines for spacing
 
 const playerShips = playerNum => state[bs.playerString(playerNum)].ships;
 
