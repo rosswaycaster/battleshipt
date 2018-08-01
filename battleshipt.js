@@ -24,8 +24,10 @@ const letters = "ABCDE";
 //Number of ships per player
 const numberOfShips = 3;
 
+//Return boolean if is a valid answer
 const verifyMultiplayerAnswer = answer => answer === "M" || answer === "C";
 
+//Return an updated state with multiplayer option set
 const multiplayerState = (state, answer) =>
   mergeObjs(state, { multiPlayer: answer === "M" ? true : false });
 
