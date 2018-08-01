@@ -18,8 +18,10 @@ const mergeObjs = (...objs) => Object.assign({}, ...objs);
 //Create a 5 by 5 array
 const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 
+//Possibile position letters
 const letters = "ABCDE";
 
+//Number of ships per player
 const numberOfShips = 3;
 
 //Return the index of the letter
