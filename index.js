@@ -45,7 +45,7 @@ const gameLoop = async () => {
       }
     } else {
       ////////if false prompt again
-      console.log("Invalid position.");
+      console.log("Invalid position. Try again.");
       return gameLoop();
     }
   }
@@ -60,19 +60,21 @@ const gameLoop = async () => {
       /////if true place hit, toggle player, rerun game loop
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
         state = bs.placeHit(state, state.currentPlayer, position);
+        console.log(`Player ${state.currentPlayer} hit a ship!`);
       } else {
         state = bs.placeMiss(state, state.currentPlayer, position);
+        console.log(`Player ${state.currentPlayer} missed.`);
       }
       state = bs.togglePlayer(state);
       return gameLoop();
     } else {
       /////if false prompt again
-      console.log("You've already attacked here");
+      console.log(`You've already attacked ${position}. Try again.`);
       return gameLoop();
     }
   } else {
     ////////if false prompt again
-    console.log("Invalid position.");
+    console.log("Invalid position. Try again.");
     return gameLoop();
   }
 };
