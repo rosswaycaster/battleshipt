@@ -14,8 +14,7 @@ const prompt = q => {
   });
 };
 
-const winningMsg = msg =>
-  console.log("\x1b[1m\x1b[32m\x1b[4m %s \x1b[0m\n", msg);
+const winningMsg = msg => console.log("\x1b[1m\x1b[32m\x1b[4m%s\x1b[0m\n", msg);
 
 const successMsg = msg => console.log("\x1b[32m%s\x1b[0m\n", msg);
 
@@ -141,7 +140,13 @@ const placeHits = async () => {
     /////if true place hit, toggle player, rerun game loop
     if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
       state = bs.placeHit(state, state.currentPlayer, position);
-      successMsg(`Computer hit a ship at ${position}!`);
+      const shipsLeft =
+        bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+      successMsg(
+        `Computer hit a ship at ${position}! ${shipsLeft} ${
+          shipsLeft === 1 ? "ship" : "ships"
+        } left.`
+      );
     } else {
       state = bs.placeMiss(state, state.currentPlayer, position);
       successMsg(`Computer missed.`);
@@ -162,7 +167,15 @@ const placeHits = async () => {
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
         state = bs.placeHit(state, state.currentPlayer, position);
         clearTerminal();
-        successMsg(`Player ${state.currentPlayer} hit a ship at ${position}!`);
+        const shipsLeft =
+          bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+        successMsg(
+          `Player ${
+            state.currentPlayer
+          } hit a ship at ${position}! ${shipsLeft} ${
+            shipsLeft === 1 ? "ship" : "ships"
+          } left.`
+        );
       } else {
         state = bs.placeMiss(state, state.currentPlayer, position);
         clearTerminal();
