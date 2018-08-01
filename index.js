@@ -26,15 +26,17 @@ const clearTerminal = () => console.log("\033c");
 
 const promptMultiplayer = async () => {
   if (state.multiPlayer === null) {
-    const answer = await prompt("Are you playing against the computer? (Y/N)");
+    const answer = await prompt(
+      "Game Mode: Multiplayer or play against Computer? (M/C)"
+    );
     if (bs.verifyMultiplayerAnswer(answer)) {
       state = bs.multiplayerState(state, answer);
       clearTerminal();
     } else {
       clearTerminal();
-      errorMsg("Please input Y or N.");
+      errorMsg("Please input 'M' for Multiplayer or 'C' for Computer.");
     }
-    gameLoop();
+    return gameLoop();
   }
 };
 
@@ -42,17 +44,32 @@ const checkForWinner = () => {
   //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
-    clearTerminal();
-    winningMsg(`Player ${winningPlayer} Wins!`);
-    process.exit();
+    if (state.multiPlayer === false && winningPlayer === 2) {
+      winningMsg(`Computer Wins!`);
+      process.exit();
+    } else {
+      winningMsg(`Player ${winningPlayer} Wins!`);
+      process.exit();
+    }
   }
 };
 
 const placeShips = async () => {
-  if (bs.countShips(state, state.currentPlayer) < bs.numberOfShips) {
+  const shipCount = bs.countShips(state, state.currentPlayer);
+
+  if (shipCount < bs.numberOfShips) {
+    if (state.multiPlayer === false && state.currentPlayer === 2) {
+      const position = bs.randomShipPosition(state, 2);
+      state = bs.placeShip(state, 2, position);
+      state = bs.togglePlayer(state);
+      return gameLoop();
+    }
+
     ////if false then prompt to place ship
     const position = await prompt(
-      `Player ${state.currentPlayer}: Where would you like to place your ship?`
+      `Player ${
+        state.currentPlayer
+      }: Where would you like to place your ship #${shipCount + 1}?`
     );
     //////check if ship is valid
     if (bs.validPosition(position)) {
@@ -77,6 +94,21 @@ const placeShips = async () => {
 };
 
 const placeHits = async () => {
+  if (state.multiPlayer === false && state.currentPlayer === 2) {
+    const position = bs.randomHitPosition(state, 2);
+
+    /////if true place hit, toggle player, rerun game loop
+    if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
+      state = bs.placeHit(state, state.currentPlayer, position);
+      successMsg(`Computer hit a ship at ${position}!`);
+    } else {
+      state = bs.placeMiss(state, state.currentPlayer, position);
+      successMsg(`Computer missed.`);
+    }
+    state = bs.togglePlayer(state);
+    return gameLoop();
+  }
+
   //prompt current player to place a hit
   const position = await prompt(
     `Player ${state.currentPlayer}: Where would you like to attack?`
@@ -88,7 +120,7 @@ const placeHits = async () => {
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
         state = bs.placeHit(state, state.currentPlayer, position);
         clearTerminal();
-        successMsg(`Player ${state.currentPlayer} hit a ship!`);
+        successMsg(`Player ${state.currentPlayer} hit a ship at ${position}!`);
       } else {
         state = bs.placeMiss(state, state.currentPlayer, position);
         clearTerminal();

@@ -24,10 +24,10 @@ const letters = "ABCDE";
 //Number of ships per player
 const numberOfShips = 3;
 
-const verifyMultiplayerAnswer = answer => answer === "Y" || answer === "N";
+const verifyMultiplayerAnswer = answer => answer === "M" || answer === "C";
 
 const multiplayerState = (state, answer) =>
-  mergeObjs(state, { multiPlayer: answer === "Y" ? true : false });
+  mergeObjs(state, { multiPlayer: answer === "M" ? true : false });
 
 //Return the index of the letter
 const letterToRow = letter => letters.indexOf(letter.toUpperCase());
