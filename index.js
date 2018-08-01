@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 
 const prompt = q => {
   return new Promise(resolve => {
-    rl.question(q + "\n", answer => {
+    rl.question(q + "\n> ", answer => {
       if (answer) {
         resolve(answer);
       }
@@ -16,11 +16,14 @@ const prompt = q => {
   });
 };
 
-const winningMsg = msg => console.log("\x1b[42m\x1b[37m\x1b[1m%s\x1b[0m", msg);
+const winningMsg = msg =>
+  console.log("\x1b[42m\x1b[37m\x1b[1m %s \x1b[0m", msg);
 
 const successMsg = msg => console.log("\x1b[32m%s\x1b[0m", msg);
 
 const errorMsg = msg => console.log("\x1b[31m%s\x1b[0m", msg);
+
+const clearTerminal = () => console.log("\033c");
 
 let state = bs.initialState();
 
@@ -28,6 +31,7 @@ const gameLoop = async () => {
   //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
+    clearTerminal();
     winningMsg(`Player ${winningPlayer} Wins!`);
     process.exit();
   }
@@ -44,14 +48,17 @@ const gameLoop = async () => {
         ////////if true place ship, rerun game loop
         state = bs.placeShip(state, state.currentPlayer, position);
         state = bs.togglePlayer(state);
+        clearTerminal();
         return gameLoop();
       } else {
-        errorMsg("You've already placed a ship there. Try again.");
+        clearTerminal();
+        errorMsg(`You've already placed a ship at ${position}. Try again.`);
         return gameLoop();
       }
     } else {
       ////////if false prompt again
-      errorMsg("Invalid position. Try again.");
+      clearTerminal();
+      errorMsg(`${position} is an invalid position. Try again.`);
       return gameLoop();
     }
   }
@@ -66,23 +73,28 @@ const gameLoop = async () => {
       /////if true place hit, toggle player, rerun game loop
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
         state = bs.placeHit(state, state.currentPlayer, position);
+        clearTerminal();
         successMsg(`Player ${state.currentPlayer} hit a ship!`);
       } else {
         state = bs.placeMiss(state, state.currentPlayer, position);
+        clearTerminal();
         successMsg(`Player ${state.currentPlayer} missed.`);
       }
       state = bs.togglePlayer(state);
       return gameLoop();
     } else {
       /////if false prompt again
+      clearTerminal();
       errorMsg(`You've already attacked ${position}. Try again.`);
       return gameLoop();
     }
   } else {
     ////////if false prompt again
-    errorMsg("Invalid position. Try again.");
+    clearTerminal();
+    errorMsg(`${position} is an invalid position. Try again.`);
     return gameLoop();
   }
 };
 
+clearTerminal();
 gameLoop();
