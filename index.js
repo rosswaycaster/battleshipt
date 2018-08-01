@@ -16,13 +16,19 @@ const prompt = q => {
   });
 };
 
+const winningMsg = msg => console.log("\x1b[42m\x1b[37m\x1b[1m%s\x1b[0m", msg);
+
+const successMsg = msg => console.log("\x1b[32m%s\x1b[0m", msg);
+
+const errorMsg = msg => console.log("\x1b[31m%s\x1b[0m", msg);
+
 let state = bs.initialState();
 
 const gameLoop = async () => {
   //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
-    console.log(`Player ${winningPlayer} Wins!`);
+    winningMsg(`Player ${winningPlayer} Wins!`);
     process.exit();
   }
 
@@ -40,12 +46,12 @@ const gameLoop = async () => {
         state = bs.togglePlayer(state);
         return gameLoop();
       } else {
-        console.log("You've already placed a ship there.");
+        errorMsg("You've already placed a ship there. Try again.");
         return gameLoop();
       }
     } else {
       ////////if false prompt again
-      console.log("Invalid position. Try again.");
+      errorMsg("Invalid position. Try again.");
       return gameLoop();
     }
   }
@@ -60,21 +66,21 @@ const gameLoop = async () => {
       /////if true place hit, toggle player, rerun game loop
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
         state = bs.placeHit(state, state.currentPlayer, position);
-        console.log(`Player ${state.currentPlayer} hit a ship!`);
+        successMsg(`Player ${state.currentPlayer} hit a ship!`);
       } else {
         state = bs.placeMiss(state, state.currentPlayer, position);
-        console.log(`Player ${state.currentPlayer} missed.`);
+        successMsg(`Player ${state.currentPlayer} missed.`);
       }
       state = bs.togglePlayer(state);
       return gameLoop();
     } else {
       /////if false prompt again
-      console.log(`You've already attacked ${position}. Try again.`);
+      errorMsg(`You've already attacked ${position}. Try again.`);
       return gameLoop();
     }
   } else {
     ////////if false prompt again
-    console.log("Invalid position. Try again.");
+    errorMsg("Invalid position. Try again.");
     return gameLoop();
   }
 };
