@@ -72,6 +72,22 @@ it("return initial state")(() => {
   return deepEqual(bs.initialState(), afterState);
 });
 
+it("return valid random ship position")(() => {
+  const beforeState = {
+    player1: {
+      ships: [
+        [1, 1, 1, 1, 1],
+        [1, undefined, 1, 1, 1],
+        [1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1]
+      ]
+    }
+  };
+
+  return equal(bs.randomShipPosition(beforeState, 1), "B1");
+});
+
 it("place player 1 ship on grid")(() => {
   const beforeState = {
     player1: {

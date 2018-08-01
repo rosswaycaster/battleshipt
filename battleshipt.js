@@ -30,7 +30,7 @@ const multiplayerState = (state, answer) =>
   mergeObjs(state, { multiPlayer: answer === "Y" ? true : false });
 
 //Return the index of the letter
-const letterToRow = row => letters.indexOf(row.toUpperCase());
+const letterToRow = letter => letters.indexOf(letter.toUpperCase());
 
 //Return player number string
 const playerString = playerNum => `player${playerNum}`;
@@ -40,6 +40,39 @@ const positionIndexes = position => ({
   rowIndex: letterToRow(position[0]),
   colIndex: Number(position[1])
 });
+
+//Return a random number from 0 - 4 inclusive
+const randomNum = () => Math.floor(Math.random() * 5);
+
+//Return a random position
+const randomPosition = () => {
+  const row = letters[randomNum()];
+  const col = randomNum();
+
+  return `${row}${col}`;
+};
+
+//Return a random ship position that can be placed
+const randomShipPosition = (state, playerNum) => {
+  const position = randomPosition();
+
+  if (canPlaceShip(state, playerNum, position)) {
+    return position;
+  }
+
+  return randomShipPosition(state, playerNum);
+};
+
+//Return a random hit position that can be placed
+const randomHitPosition = (state, playerNum) => {
+  const position = randomPosition();
+
+  if (canPlaceHit(state, playerNum, position)) {
+    return position;
+  }
+
+  return randomHitPosition(state, playerNum);
+};
 
 //Return an updated state with ship/hit placed
 const place = (state, playerNum, type, position, value = 1) => {
@@ -100,8 +133,8 @@ const positionValue = (state, playerNum, type, position) => {
 const validPosition = position =>
   position.length === 2 &&
   letterToRow(position[0]) > -1 &&
-  Number(position[1]) <= 5 &&
-  Number(position[1]) > 0;
+  Number(position[1]) <= 4 &&
+  Number(position[1]) >= 0;
 
 //Return boolean if ship/hit can be placed on board
 const canPlace = (state, playerNum, type, position) =>
@@ -145,6 +178,8 @@ module.exports = {
   multiplayerState,
   numberOfShips,
   validPosition,
+  randomShipPosition,
+  randomHitPosition,
   placeShip,
   placeHit,
   placeMiss,
