@@ -18,7 +18,7 @@ const mergeObjs = (...objs) => Object.assign({}, ...objs);
 //Create a 5 by 5 array
 const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
 
-//Possibile position letters
+//Possible position letters
 const letters = "ABCDE";
 
 //Number of ships per player
@@ -37,7 +37,7 @@ const letterToRow = letter => letters.indexOf(letter.toUpperCase());
 //Return player number string
 const playerString = playerNum => `player${playerNum}`;
 
-//Return object of row & column indexs from position string
+//Return object of row & column indexes from position string
 const positionIndexes = position => ({
   rowIndex: letterToRow(position[0]),
   colIndex: Number(position[1])
@@ -131,7 +131,7 @@ const positionValue = (state, playerNum, type, position) => {
   return state[player][type][rowIndex][colIndex];
 };
 
-//Return boolean if the position is possibile on the grid
+//Return boolean if the position is possible on the grid
 const validPosition = position =>
   position.length === 2 &&
   letterToRow(position[0]) > -1 &&
