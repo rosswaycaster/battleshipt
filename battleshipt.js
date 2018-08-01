@@ -24,6 +24,11 @@ const letters = "ABCDE";
 //Number of ships per player
 const numberOfShips = 3;
 
+const verifyMultiplayerAnswer = answer => answer === "Y" || answer === "N";
+
+const multiplayerState = (state, answer) =>
+  mergeObjs(state, { multiPlayer: answer === "Y" ? true : false });
+
 //Return the index of the letter
 const letterToRow = row => letters.indexOf(row.toUpperCase());
 
@@ -136,6 +141,8 @@ const hasWinner = state => {
 
 module.exports = {
   initialState,
+  verifyMultiplayerAnswer,
+  multiplayerState,
   numberOfShips,
   validPosition,
   placeShip,

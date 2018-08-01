@@ -10,20 +10,33 @@ const prompt = q => {
   return new Promise(resolve => {
     rl.question(q + "\n> ", answer => {
       if (answer) {
-        resolve(answer);
+        resolve(answer.toUpperCase());
       }
     });
   });
 };
 
-const winningMsg = msg =>
-  console.log("\x1b[42m\x1b[37m\x1b[1m %s \x1b[0m", msg);
+const winningMsg = msg => console.log("\x1b[1m\x1b[32m\x1b[4m %s \x1b[0m", msg);
 
 const successMsg = msg => console.log("\x1b[32m%s\x1b[0m", msg);
 
 const errorMsg = msg => console.log("\x1b[31m%s\x1b[0m", msg);
 
 const clearTerminal = () => console.log("\033c");
+
+const promptMultiplayer = async () => {
+  if (state.multiPlayer === null) {
+    const answer = await prompt("Are you playing against the computer? (Y/N)");
+    if (bs.verifyMultiplayerAnswer(answer)) {
+      state = bs.multiplayerState(state, answer);
+      clearTerminal();
+    } else {
+      clearTerminal();
+      errorMsg("Please input Y or N.");
+    }
+    gameLoop();
+  }
+};
 
 const checkForWinner = () => {
   //check for a winning player
@@ -100,9 +113,10 @@ const placeHits = async () => {
 let state = bs.initialState();
 
 const gameLoop = async () => {
+  promptMultiplayer();
+
   checkForWinner();
 
-  //see if current player has placed all ships
   placeShips();
 
   placeHits();
