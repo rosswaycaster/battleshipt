@@ -91,6 +91,7 @@ const positionValue = (state, playerNum, type, position) => {
 
 //Return boolean if the position is possibile on the grid
 const validPosition = position =>
+  position.length === 2 &&
   letterToRow(position[0]) > -1 &&
   Number(position[1]) <= 5 &&
   Number(position[1]) > 0;
