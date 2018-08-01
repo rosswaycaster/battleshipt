@@ -1,5 +1,6 @@
 //Battleshipt game logic
 const bs = require("./battleshipt");
+
 //Use the built-in readline module to get player input
 const readline = require("readline");
 

@@ -138,6 +138,7 @@ const validPosition = position =>
   Number(position[1]) <= 4 &&
   Number(position[1]) >= 0;
 
+//Naturalize the position input to be in letter-number format
 const naturalizePosition = position => {
   const reversed = position
     .split("")
