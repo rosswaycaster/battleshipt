@@ -9,9 +9,7 @@ const rl = readline.createInterface({
 const prompt = q => {
   return new Promise(resolve => {
     rl.question(q + "\n> ", answer => {
-      if (answer) {
-        resolve(answer.toUpperCase());
-      }
+      resolve(answer.toUpperCase());
     });
   });
 };
