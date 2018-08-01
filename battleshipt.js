@@ -176,6 +176,8 @@ const hasWinner = state => {
 
 module.exports = {
   initialState,
+  letters,
+  playerString,
   verifyMultiplayerAnswer,
   multiplayerState,
   numberOfShips,
