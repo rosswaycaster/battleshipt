@@ -143,7 +143,8 @@ const placeShips = async () => {
     //prompt to place ship below ship grid
     const position = bs.naturalizePosition(
       await prompt(
-        shipsGrid(playerShips(state.currentPlayer)) +
+        `Player ${state.currentPlayer} Ships\n\n` +
+          shipsGrid(playerShips(state.currentPlayer)) +
           `Player ${
             state.currentPlayer
           }: Where would you like to place your ship #${shipCount + 1}?`
@@ -207,7 +208,8 @@ const placeAttacks = async () => {
   //prompt to attack and show their previous hits on the grid
   const position = bs.naturalizePosition(
     await prompt(
-      hitsGrid(playerHits(state.currentPlayer)) +
+      `Player ${state.currentPlayer} Attacks\n\n` +
+        hitsGrid(playerHits(state.currentPlayer)) +
         `Player ${state.currentPlayer}: Where would you like to attack?`
     )
   );
