@@ -93,6 +93,7 @@ const promptMultiplayer = async () => {
     );
     //verify that their answer is an option
     if (bs.verifyMultiplayerAnswer(answer)) {
+      //set multiplayer state
       state = bs.multiplayerState(state, answer);
       clearTerminal();
     } else {
@@ -103,11 +104,13 @@ const promptMultiplayer = async () => {
   }
 };
 
+//Check for a winning player
 const checkForWinner = () => {
-  //check for a winning player
   const winningPlayer = bs.hasWinner(state);
   if (winningPlayer) {
+    //output winning hits grid
     console.log(hitsGrid(playerHits(winningPlayer)));
+    //check to see if computer won
     if (state.multiPlayer === false && winningPlayer === 2) {
       winningMsg(`Computer Wins!`);
       process.exit();
@@ -118,7 +121,9 @@ const checkForWinner = () => {
   }
 };
 
+//Prompt players to place their ships
 const placeShips = async () => {
+  //get the number of ships placed for the current player
   const shipCount = bs.countShips(state, state.currentPlayer);
 
   if (shipCount < bs.numberOfShips) {
