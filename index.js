@@ -98,6 +98,7 @@ const promptMultiplayer = async () => {
       clearTerminal();
     } else {
       clearTerminal();
+      //display error if invalid answer
       errorMsg("Please input 'M' for Multiplayer or 'C' for Computer.");
     }
     return gameLoop();
@@ -126,15 +127,20 @@ const placeShips = async () => {
   //get the number of ships placed for the current player
   const shipCount = bs.countShips(state, state.currentPlayer);
 
+  //only prompt if user hasn't placed all their ships
   if (shipCount < bs.numberOfShips) {
+    //check if computer is playing as player 2
     if (state.multiPlayer === false && state.currentPlayer === 2) {
+      //generate a random position that can be placed on grid
       const position = bs.randomShipPosition(state, 2);
+      //place the ship
       state = bs.placeShip(state, 2, position);
+      //toggle the player
       state = bs.togglePlayer(state);
       return gameLoop();
     }
 
-    ////if false then prompt to place ship
+    //prompt to place ship below ship grid
     const position = bs.naturalizePosition(
       await prompt(
         shipsGrid(playerShips(state.currentPlayer)) +
@@ -143,22 +149,25 @@ const placeShips = async () => {
           }: Where would you like to place your ship #${shipCount + 1}?`
       )
     );
-    //////check if ship is valid
+    //check if requested position is valid
     if (bs.validPosition(position)) {
+      //check if a ship has already been placed at this position
       if (bs.canPlaceShip(state, state.currentPlayer, position)) {
-        ////////if true place ship, rerun game loop
+        //place the ship
         state = bs.placeShip(state, state.currentPlayer, position);
+        //toggle the player
         state = bs.togglePlayer(state);
         clearTerminal();
         return gameLoop();
       } else {
         clearTerminal();
+        //display error if a ship has already been placed at this position
         errorMsg(`You've already placed a ship at ${position}. Try again.`);
         return gameLoop();
       }
     } else {
-      ////////if false prompt again
       clearTerminal();
+      //display error if the requested position is invalid
       errorMsg(`${position} is an invalid position. Try again.`);
       return gameLoop();
     }
