@@ -78,15 +78,20 @@ const hitsGrid = array =>
     return str;
   }, "") + "\n\n"; //add two new lines for spacing
 
+//Return the ships array of the requested player
 const playerShips = playerNum => state[bs.playerString(playerNum)].ships;
 
+//Return the hits array of the requested player
 const playerHits = playerNum => state[bs.playerString(playerNum)].hits;
 
+//Ask the user if they want to play multiplayer or the computer.
 const promptMultiplayer = async () => {
+  //don't run if multiplayer has already been set
   if (state.multiPlayer === null) {
     const answer = await prompt(
       "Game Mode: Multiplayer or play against Computer? (M/C)"
     );
+    //verify that their answer is an option
     if (bs.verifyMultiplayerAnswer(answer)) {
       state = bs.multiplayerState(state, answer);
       clearTerminal();
