@@ -192,13 +192,20 @@ const placeAttacks = async () => {
       successMsg(
         `Computer hit a ship at ${position}! ${shipsLeft} ${
           shipsLeft === 1 ? "ship" : "ships"
-        } left.`
+        } left to sink.`
       );
     } else {
       //place the miss
       state = bs.placeMiss(state, state.currentPlayer, position);
+      //calculate how many ships the other player has left
+      const shipsLeft =
+        bs.numberOfShips - bs.countHits(state, state.currentPlayer);
       //display that the computer missed
-      successMsg(`Computer missed.`);
+      successMsg(
+        `Computer missed. ${shipsLeft} ${
+          shipsLeft === 1 ? "ship" : "ships"
+        } left to sink.`
+      );
     }
     //toggle the player
     state = bs.togglePlayer(state);
@@ -231,14 +238,21 @@ const placeAttacks = async () => {
             state.currentPlayer
           } hit a ship at ${position}! ${shipsLeft} ${
             shipsLeft === 1 ? "ship" : "ships"
-          } left.`
+          } left to sink.`
         );
       } else {
         //place the miss
         state = bs.placeMiss(state, state.currentPlayer, position);
         clearTerminal();
+        //calculate how many ships the other player has left
+        const shipsLeft =
+          bs.numberOfShips - bs.countHits(state, state.currentPlayer);
         //display that the attack was a miss
-        successMsg(`Player ${state.currentPlayer} missed.`);
+        successMsg(
+          `Player ${state.currentPlayer} missed. ${shipsLeft} ${
+            shipsLeft === 1 ? "ship" : "ships"
+          } left to sink.`
+        );
       }
       //toggle the player
       state = bs.togglePlayer(state);
