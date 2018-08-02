@@ -1,19 +1,25 @@
+//Battleshipt game logic
 const bs = require("./battleshipt");
 
-//Simple functional testing framework
+//Style the passed tests
 const logPassed = title => console.log("\x1b[32m%s\x1b[0m", `PASSED: ${title}`);
 
+//Style the failed tests
 const logFailed = title => console.log("\x1b[31m%s\x1b[0m", `FAILED: ${title}`);
 
+//Style the section titles
 const section = title => console.log("\n\x1b[47m\x1b[30m %s \x1b[0m", title);
 
+//Simple functional testing framework
 const it = title => func => {
   const output = typeof func === "function" ? func() : func;
   return output === true ? logPassed(title) : logFailed(title);
 };
 
+//Return if arguments are equal
 const equal = (a, b) => a === b;
 
+//Return if arguments are deep equal
 const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 //Start the timer
