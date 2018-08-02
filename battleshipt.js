@@ -12,17 +12,20 @@ const initialState = () => ({
   }
 });
 
-//Return a single merged object
-const mergeObjs = (...objs) => Object.assign({}, ...objs);
-
-//Create a 5 by 5 array
-const createGrid = () => [...Array(5)].map(() => [...Array(5)]);
-
 //Possible position letters
 const letters = "ABCDE";
 
 //Number of ships per player
 const numberOfShips = 3;
+
+//Size of the grid
+const gridSize = 5;
+
+//Return a single merged object
+const mergeObjs = (...objs) => Object.assign({}, ...objs);
+
+//Create an array based on the grid size
+const createGrid = () => [...Array(gridSize)].map(() => [...Array(gridSize)]);
 
 //Return boolean if is a valid answer
 const verifyMultiplayerAnswer = answer => answer === "M" || answer === "C";
@@ -43,7 +46,7 @@ const positionIndexes = position => ({
 });
 
 //Return a random number from 0 - 4 inclusive
-const randomNum = () => Math.floor(Math.random() * 5);
+const randomNum = () => Math.floor(Math.random() * gridSize);
 
 //Return a random position
 const randomPosition = () => {
