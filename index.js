@@ -147,7 +147,7 @@ const placeShips = async () => {
           shipsGrid(playerShips(state.currentPlayer)) +
           `Player ${
             state.currentPlayer
-          }: Where would you like to place your ship #${shipCount + 1}?`
+          }: Where would you like to place ship #${shipCount + 1}?`
       )
     );
     //check if requested position is valid
