@@ -2,7 +2,7 @@
 
 Play battleship in the terminal. Built with Node and JavaScript without any dependencies. Play against a friend or the computer!
 
-![Screenshot](https://file-dtkicamdoq.now.sh/)
+![Screenshot](https://file-szqojywfkg.now.sh/)
 
 ## Requirements
 
