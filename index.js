@@ -88,9 +88,7 @@ const playerHits = playerNum => state[bs.playerString(playerNum)].hits;
 const promptMultiplayer = async () => {
   //don't run if multiplayer has already been set
   if (state.multiPlayer === null) {
-    const answer = await prompt(
-      "Game Mode: Multiplayer or play against Computer? (M/C)"
-    );
+    const answer = await prompt("Game Mode: Multiplayer or play against Computer? (M/C)");
     //verify that their answer is an option
     if (bs.verifyMultiplayerAnswer(answer)) {
       //set multiplayer state
@@ -145,9 +143,7 @@ const placeShips = async () => {
       await prompt(
         `Player ${state.currentPlayer} Ships\n\n` +
           shipsGrid(playerShips(state.currentPlayer)) +
-          `Player ${
-            state.currentPlayer
-          }: Where would you like to place ship #${shipCount + 1}?`
+          `Player ${state.currentPlayer}: Where would you like to place ship #${shipCount + 1}?`
       )
     );
     //check if requested position is valid
@@ -175,6 +171,8 @@ const placeShips = async () => {
   }
 };
 
+const shipsLeftString = shipsLeft => `${shipsLeft} ${shipsLeft === 1 ? "ship" : "ships"}`;
+
 //Prompt players to place their attacks (hit/miss)
 const placeAttacks = async () => {
   //check if computer is playing as player 2
@@ -186,26 +184,16 @@ const placeAttacks = async () => {
       //place the hit
       state = bs.placeHit(state, state.currentPlayer, position);
       //calculate how many ships the other player has left
-      const shipsLeft =
-        bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+      const shipsLeft = bs.numberOfShips - bs.countHits(state, state.currentPlayer);
       //display that it was a hit and how many ships are left
-      successMsg(
-        `Computer hit a ship at ${position}! ${shipsLeft} ${
-          shipsLeft === 1 ? "ship" : "ships"
-        } left to sink.`
-      );
+      successMsg(`Computer hit a ship at ${position}! ${shipsLeftString(shipsLeft)} left to sink.`);
     } else {
       //place the miss
       state = bs.placeMiss(state, state.currentPlayer, position);
       //calculate how many ships the other player has left
-      const shipsLeft =
-        bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+      const shipsLeft = bs.numberOfShips - bs.countHits(state, state.currentPlayer);
       //display that the computer missed
-      successMsg(
-        `Computer missed. ${shipsLeft} ${
-          shipsLeft === 1 ? "ship" : "ships"
-        } left to sink.`
-      );
+      successMsg(`Computer missed. ${shipsLeftString(shipsLeft)} left to sink.`);
     }
     //toggle the player
     state = bs.togglePlayer(state);
@@ -230,29 +218,19 @@ const placeAttacks = async () => {
         state = bs.placeHit(state, state.currentPlayer, position);
         clearTerminal();
         //calculate how many ships the other player has left
-        const shipsLeft =
-          bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+        const shipsLeft = bs.numberOfShips - bs.countHits(state, state.currentPlayer);
         //display that the attack was a hit and how many ships are left
         successMsg(
-          `Player ${
-            state.currentPlayer
-          } hit a ship at ${position}! ${shipsLeft} ${
-            shipsLeft === 1 ? "ship" : "ships"
-          } left to sink.`
+          `Player ${state.currentPlayer} hit a ship at ${position}! ${shipsLeftString(shipsLeft)} left to sink.`
         );
       } else {
         //place the miss
         state = bs.placeMiss(state, state.currentPlayer, position);
         clearTerminal();
         //calculate how many ships the other player has left
-        const shipsLeft =
-          bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+        const shipsLeft = bs.numberOfShips - bs.countHits(state, state.currentPlayer);
         //display that the attack was a miss
-        successMsg(
-          `Player ${state.currentPlayer} missed. ${shipsLeft} ${
-            shipsLeft === 1 ? "ship" : "ships"
-          } left to sink.`
-        );
+        successMsg(`Player ${state.currentPlayer} missed. ${shipsLeftString(shipsLeft)} left to sink.`);
       }
       //toggle the player
       state = bs.togglePlayer(state);

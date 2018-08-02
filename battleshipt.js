@@ -28,8 +28,7 @@ const numberOfShips = 3;
 const verifyMultiplayerAnswer = answer => answer === "M" || answer === "C";
 
 //Return an updated state with multiplayer option set
-const multiplayerState = (state, answer) =>
-  mergeObjs(state, { multiPlayer: answer === "M" ? true : false });
+const multiplayerState = (state, answer) => mergeObjs(state, { multiPlayer: answer === "M" ? true : false });
 
 //Return the index of the letter
 const letterToRow = letter => letters.indexOf(letter.toUpperCase());
@@ -94,16 +93,13 @@ const place = (state, playerNum, type, position, value = 1) => {
 };
 
 //Easily place a ship
-const placeShip = (state, playerNum, position) =>
-  place(state, playerNum, "ships", position);
+const placeShip = (state, playerNum, position) => place(state, playerNum, "ships", position);
 
 //Easily place a hit
-const placeHit = (state, playerNum, position) =>
-  place(state, playerNum, "hits", position);
+const placeHit = (state, playerNum, position) => place(state, playerNum, "hits", position);
 
 //Easily place a miss
-const placeMiss = (state, playerNum, position) =>
-  place(state, playerNum, "hits", position, 0);
+const placeMiss = (state, playerNum, position) => place(state, playerNum, "hits", position, 0);
 
 //Return the number of ships/hits on players grid
 const count = (state, playerNum, type) => {
@@ -133,10 +129,7 @@ const positionValue = (state, playerNum, type, position) => {
 
 //Return boolean if the position is possible on the grid
 const validPosition = position =>
-  position.length === 2 &&
-  letterToRow(position[0]) > -1 &&
-  Number(position[1]) <= 4 &&
-  Number(position[1]) >= 0;
+  position.length === 2 && letterToRow(position[0]) > -1 && Number(position[1]) <= 4 && Number(position[1]) >= 0;
 
 //Naturalize the position input to be in letter-number format
 const naturalizePosition = position => {
@@ -152,23 +145,19 @@ const canPlace = (state, playerNum, type, position) =>
   positionValue(state, playerNum, type, position) === undefined;
 
 //Easily check if ship can be placed
-const canPlaceShip = (state, playerNum, position) =>
-  canPlace(state, playerNum, "ships", position);
+const canPlaceShip = (state, playerNum, position) => canPlace(state, playerNum, "ships", position);
 
 //Easily check if hit can be placed
-const canPlaceHit = (state, playerNum, position) =>
-  canPlace(state, playerNum, "hits", position);
+const canPlaceHit = (state, playerNum, position) => canPlace(state, playerNum, "hits", position);
 
 //Return boolean if ship was hit
-const didHitShip = (state, playerNum, position) =>
-  positionValue(state, playerNum, "ships", position) === 1;
+const didHitShip = (state, playerNum, position) => positionValue(state, playerNum, "ships", position) === 1;
 
 //Return the number of the other player
 const otherPlayer = playerNum => (playerNum === 1 ? 2 : 1);
 
 //Return an updated state with the current player toggled
-const togglePlayer = state =>
-  mergeObjs(state, { currentPlayer: otherPlayer(state.currentPlayer) });
+const togglePlayer = state => mergeObjs(state, { currentPlayer: otherPlayer(state.currentPlayer) });
 
 //Check if there is a winner then return the winning player number
 const hasWinner = state => {

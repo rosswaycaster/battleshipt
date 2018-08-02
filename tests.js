@@ -75,13 +75,7 @@ it("return initial state")(() => {
 it("return valid random ship position")(() => {
   const beforeState = {
     player1: {
-      ships: [
-        [1, 1, 1, 1, 1],
-        [1, undefined, 1, 1, 1],
-        [1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1]
-      ]
+      ships: [[1, 1, 1, 1, 1], [1, undefined, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
     }
   };
 
