@@ -171,6 +171,7 @@ const placeShips = async () => {
   }
 };
 
+//Return a string with the number of ships left
 const shipsLeftString = shipsLeft => `${shipsLeft} ${shipsLeft === 1 ? "ship" : "ships"}`;
 
 //Prompt players to place their attacks (hit/miss)
