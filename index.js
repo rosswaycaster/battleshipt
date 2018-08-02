@@ -174,44 +174,56 @@ const placeShips = async () => {
   }
 };
 
-const placeHits = async () => {
+//Prompt players to place their attacks (hit/miss)
+const placeAttacks = async () => {
+  //check if computer is playing as player 2
   if (state.multiPlayer === false && state.currentPlayer === 2) {
+    //generate a random position that can be placed on grid
     const position = bs.randomHitPosition(state, 2);
-
-    /////if true place hit, toggle player, rerun game loop
+    //check to see if the position was a hit or miss
     if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
+      //place the hit
       state = bs.placeHit(state, state.currentPlayer, position);
+      //calculate how many ships the other player has left
       const shipsLeft =
         bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+      //display that it was a hit and how many ships are left
       successMsg(
         `Computer hit a ship at ${position}! ${shipsLeft} ${
           shipsLeft === 1 ? "ship" : "ships"
         } left.`
       );
     } else {
+      //place the miss
       state = bs.placeMiss(state, state.currentPlayer, position);
+      //display that the computer missed
       successMsg(`Computer missed.`);
     }
+    //toggle the player
     state = bs.togglePlayer(state);
     return gameLoop();
   }
 
-  //prompt current player to place a hit
+  //prompt to attack and show their previous hits on the grid
   const position = bs.naturalizePosition(
     await prompt(
       hitsGrid(playerHits(state.currentPlayer)) +
         `Player ${state.currentPlayer}: Where would you like to attack?`
     )
   );
-  ////check if hit is valid
+  //check if requested position is valid
   if (bs.validPosition(position)) {
+    //check if a hit/miss has already been placed at this position
     if (bs.canPlaceHit(state, state.currentPlayer, position)) {
-      /////if true place hit, toggle player, rerun game loop
+      //check to see if the position was a hit or miss
       if (bs.didHitShip(state, bs.otherPlayer(state.currentPlayer), position)) {
+        //place the hit
         state = bs.placeHit(state, state.currentPlayer, position);
         clearTerminal();
+        //calculate how many ships the other player has left
         const shipsLeft =
           bs.numberOfShips - bs.countHits(state, state.currentPlayer);
+        //display that the attack was a hit and how many ships are left
         successMsg(
           `Player ${
             state.currentPlayer
@@ -220,37 +232,40 @@ const placeHits = async () => {
           } left.`
         );
       } else {
+        //place the miss
         state = bs.placeMiss(state, state.currentPlayer, position);
         clearTerminal();
+        //display that the attack was a miss
         successMsg(`Player ${state.currentPlayer} missed.`);
       }
+      //toggle the player
       state = bs.togglePlayer(state);
       return gameLoop();
     } else {
-      /////if false prompt again
       clearTerminal();
+      //display error if an attack has already been placed at this position
       errorMsg(`You've already attacked ${position}. Try again.`);
       return gameLoop();
     }
   } else {
-    ////////if false prompt again
     clearTerminal();
+    //display error if the requested position is invalid
     errorMsg(`${position} is an invalid position. Try again.`);
     return gameLoop();
   }
 };
 
+//Set the initial game state
 let state = bs.initialState();
 
-const gameLoop = async () => {
+//Game loop that calls the game functions
+const gameLoop = () => {
   promptMultiplayer();
-
   checkForWinner();
-
   placeShips();
-
-  placeHits();
+  placeAttacks();
 };
 
+//Clear the terminal and start the game
 clearTerminal();
 gameLoop();
